@@ -4,6 +4,7 @@ public class Player {
     private int score = 0;
     private Deck deck;
     private float maxMatchChance;
+    private boolean hasCards = false;
     
 
     public Player(String _name, Deck _deck, float _maxMatchChance) {
@@ -26,12 +27,14 @@ public class Player {
         }
         if (containedInHand) {
             score += card;
+            System.out.println(name + " drew a " + card);
             discardHand();
         } else {
             addToHand(card);
         }
         
     }
+    
     private void addToHand(int card) {
         int[] tempHand = new int[hand.length + 1];
 
@@ -40,6 +43,7 @@ public class Player {
         }
 
         tempHand[tempHand.length - 1] = card;
+        hasCards = true;
         hand = tempHand;
     }
 
@@ -58,7 +62,6 @@ public class Player {
         for (int card : hand) {
             matchChance += CalcMatchChance(card);
         }
-        System.out.println("TotalMatchChance: " + matchChance);
         if (matchChance <= maxMatchChance) {
             return true;
         } else {
@@ -69,16 +72,27 @@ public class Player {
     private float CalcMatchChance(int card) {
         int[] numCards = deck.getNumCards();
         float matchChance = (float) numCards[card] / deck.getDeckLength() * 100;
-        System.out.println("Match chance " + card + ": " + matchChance);
         return matchChance;
     }
 
     private void discardHand() {
         deck.discard(hand);
+        hand = new int[1];
+        hasCards = false;
+
     }
 
     public String getName() {
         return name;
     }
+
+    public boolean hasCards() {
+        return hasCards;
+    }
+
+    public int getScore() {
+        return score;
+    }
 }
+
 
