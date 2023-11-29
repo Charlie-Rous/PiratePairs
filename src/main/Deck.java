@@ -1,10 +1,10 @@
 public class Deck {
-    int deckLength = 55;
-    int[] cards = new int[deckLength];
-
-    int index = 0;
-
-    int[] discard = new int[deckLength];
+    private int deckLength = 55;
+    private int[] cards = new int[deckLength];
+    private int index = 0;
+    private int[] discard = new int[deckLength];
+    private int[] numCards = {0 , 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+   
 
    public void populateDeck() {
     for (int i = 1; i <= 10; i++) {
@@ -44,7 +44,15 @@ public class Deck {
     }
     cards = newCards;
 
+    numCards[card] -= 1;
     return card;
    }
     
+   public int[] getNumCards() {
+    return numCards;
+   }
+   
+   public int getDeckLength() {
+    return deckLength;
+   }
 }
