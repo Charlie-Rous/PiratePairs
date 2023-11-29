@@ -26,10 +26,11 @@ public class PiratePairs {
         deck.shuffle();
         System.out.println("Welcome");
         printLine();
-        
+
         for (Player player : players) {
             player.takeCard(deck.dealCard());
         }
+        printPlayerHands();
     }
 
     public static void TakeTurn(Player player) {
@@ -40,5 +41,12 @@ public class PiratePairs {
 
     public static void printLine() {
         System.out.println("-----------------------");
+    }
+
+
+    public static void printPlayerHands() {
+        for (int i = 0; i < players.length; i++) {
+            System.out.println(players[i].getName() + ": " + players[i].handToString());
+        }
     }
 }

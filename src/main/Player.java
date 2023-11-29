@@ -43,10 +43,14 @@ public class Player {
         hand = tempHand;
     }
 
-    public void printHand() {
-        for (int i = 0; i < hand.length; i ++) {
-            System.out.println(hand[i]);
+    public String handToString() {
+        String handToString = "[" + hand[0];
+        for (int i = 1; i < hand.length; i ++) {
+            handToString += "," + hand[i];
         }
+        handToString += "]";
+        return handToString;
+        
     }
 
     public boolean wantsCard() {
@@ -71,6 +75,10 @@ public class Player {
 
     private void discardHand() {
         deck.discard(hand);
+    }
+
+    public String getName() {
+        return name;
     }
 }
 
