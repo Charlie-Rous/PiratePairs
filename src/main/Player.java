@@ -1,9 +1,10 @@
 public class Player {
     private String name;
     private int[] hand = {};
-    private int score;
+    private int score = 0;
     private Deck deck;
     private float maxMatchChance;
+    
 
     public Player(String _name, Deck _deck, float _maxMatchChance) {
         name = _name;
@@ -15,7 +16,23 @@ public class Player {
         score += num;
     }
 
-    public void addToHand(int card) {
+
+    public void takeCard(int card) {
+        boolean containedInHand = false;
+        for (int i = 0; i < hand.length; i++) {
+            if (card == hand[i]) {
+                containedInHand = true;
+            }
+        }
+        if (containedInHand) {
+            score += card;
+            discardHand();
+        } else {
+            addToHand(card);
+        }
+        
+    }
+    private void addToHand(int card) {
         int[] tempHand = new int[hand.length + 1];
 
         for (int i = 0; i < hand.length; i++) {
@@ -51,4 +68,9 @@ public class Player {
         System.out.println("Match chance " + card + ": " + matchChance);
         return matchChance;
     }
+
+    private void discardHand() {
+        deck.discard(hand);
+    }
 }
+

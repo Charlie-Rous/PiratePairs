@@ -13,23 +13,32 @@ public class PiratePairs {
         p1.wantsCard();
         p2.wantsCard();
 
-        while (playing) {
-            //game loop
-        }
+        // while (playing) {
+        //     for (Player player : players) {
+        //         TakeTurn(player);
+        //     }
+        // }
         
     }
 
     public static void Start() {
         deck.populateDeck();
         deck.shuffle();
+        System.out.println("Welcome");
+        printLine();
+        
         for (Player player : players) {
-            player.addToHand(deck.dealCard());
+            player.takeCard(deck.dealCard());
         }
     }
 
-    // public static void TakeTurn(Player player) {
-    //     if (player.wantsCard()) {
-    //         player.addToHand(deck.dealCard());
-    //     }
-    // }
+    public static void TakeTurn(Player player) {
+        if (player.wantsCard()) {
+            player.takeCard(deck.dealCard());
+        }
+    }
+
+    public static void printLine() {
+        System.out.println("-----------------------");
+    }
 }

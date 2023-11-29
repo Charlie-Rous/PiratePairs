@@ -2,7 +2,7 @@ public class Deck {
     private int deckLength = 55;
     private int[] cards = new int[deckLength];
     private int index = 0;
-    private int[] discard = new int[deckLength];
+    private int[] discard = new int[0];
     private int[] numCards = {0 , 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
    
 
@@ -55,4 +55,19 @@ public class Deck {
    public int getDeckLength() {
     return deckLength;
    }
+
+   public void discard(int[] hand) {
+        int[] tempDiscard = new int[discard.length + hand.length];
+        int index = 0;
+        for(int i = 0; i < discard.length; i++) {
+            tempDiscard[i] = discard[i];
+            index++;
+        }
+        for (int i = 0; i < hand.length; i++) {
+            tempDiscard[index] = hand[i];
+            index++;
+        }
+        discard = tempDiscard;
+   }
 }
+
