@@ -64,11 +64,15 @@ public class Player {
     }
 
     public boolean wantsCard(int[] cardOnTable) {
-        float expectedValue = 0;
+        float matchChance = 0;
+        int sum = 0;
         int minimumCard = minimumCard(cardOnTable);
+        float expectedValue = 0;
         for (int card : hand) {
-            expectedValue += card * CalcMatchChance(card);
+            matchChance += CalcMatchChance(card);
+            sum += card;
         }
+        expectedValue = sum * matchChance;
         System.out.println(name + " expextedVal: " + expectedValue);
         System.out.println("minimum card: " + minimumCard);
         if (expectedValue < minimumCard) {
