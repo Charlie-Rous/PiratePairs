@@ -70,9 +70,12 @@ public class Player {
     public boolean wantsCard(int[] cardOnTable) {
         float matchChance = 0;
         int sum = 0;
-        
         int minimumCard = minimumCard(cardOnTable);
         float expectedValue = 0;
+        if (score + minimumCard >= PiratePairs.maxScore) {
+            return true;
+        }
+        
         for (int card : hand) {
             matchChance += CalcMatchChance(card);
             sum += card;
