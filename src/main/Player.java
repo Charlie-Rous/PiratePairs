@@ -3,14 +3,13 @@ public class Player {
     private int[] hand = {};
     private int score = 0;
     private Deck deck;
-    private float maxMatchChance;
     private boolean hasCards = false;
     
 
-    public Player(String _name, Deck _deck, float _maxMatchChance) {
+    public Player(String _name, Deck _deck) {
         name = _name;
         deck = _deck;
-        maxMatchChance = _maxMatchChance;
+        
     }
 
     private void increaseScore(int num) {

@@ -1,10 +1,10 @@
 public class PiratePairs {
     static Player[] players = new Player[4];
     static Deck deck = new Deck();
-    static Player p1 = new Player("Dave", deck, 50);
-    static Player p2 = new Player("Mark", deck, 30);
-    static Player p3 = new Player("Henrey", deck, 30);
-    static Player p4 = new Player("Chris", deck, 30);
+    static Player p1 = new Player("Dave", deck);
+    static Player p2 = new Player("Mark", deck);
+    static Player p3 = new Player("Henrey", deck);
+    static Player p4 = new Player("Chris", deck);
     static int maxTurns = 0;
     static boolean playing = true;
     static int maxScore = 21;
