@@ -29,7 +29,13 @@ public class Player {
                 containedInHand = true;
             }
         }
-        System.out.println(name + " drew a " + card);
+        if (card == 8) {
+            System.out.println(name + " drew an " + card);
+        } else {
+            System.out.println(name + " drew an " + card);
+        }
+
+       
         if (containedInHand) {
             increaseScore(card);;
             discardHand();
@@ -75,7 +81,7 @@ public class Player {
         if (score + minimumCard >= PiratePairs.maxScore) {
             return true;
         }
-        
+
         for (int card : hand) {
             matchChance += CalcMatchChance(card);
             sum += card;
