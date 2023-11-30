@@ -16,7 +16,9 @@ public class PiratePairs {
 
         while (playing) {
             for (Player player : players) {
-                TakeTurn(player);
+                if (playing) {
+                    TakeTurn(player);
+                }
             }
             printPlayerStatus();
             
@@ -71,7 +73,7 @@ public class PiratePairs {
         if (players.length == 1) {
             playing = false;
         }
-        if (maxTurns >= 50) {
+        if (maxTurns >= 100) {
             playing = false;
         } else {
             maxTurns++;
