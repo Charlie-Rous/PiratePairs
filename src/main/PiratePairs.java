@@ -8,6 +8,7 @@ public class PiratePairs {
     static int maxTurns = 0;
     static boolean playing = true;
     static int maxScore = 21;
+    static Player losingPlayer;
     
     public static void main(String[] args){
         players[0] = p1;
@@ -20,16 +21,15 @@ public class PiratePairs {
             for (Player player : players) {
                 if (playing) {
                     TakeTurn(player);
+                } else {
+                    break;
                 }
             }
             printPlayerStatus();
-            
             printLine();
-            checkEndConditions();
             
         }
-        System.out.println("Game Over! " + players[0].getName() + " Wins!");
-        
+        System.out.println(losingPlayer.getName() + " loses");
     }
 
     public static void Start() {
@@ -67,17 +67,6 @@ public class PiratePairs {
     public static void printPlayerStatus() {
         for (int i = 0; i < players.length; i++) {
             System.out.println(players[i].getName() + " Hand: " + players[i].handToString() + " Score: " + players[i].getScore());
-        }
-    }
-
-    static void checkEndConditions() {
-        if (players.length == 1) {
-            playing = false;
-        }
-        if (maxTurns >= 100) {
-            playing = false;
-        } else {
-            maxTurns++;
         }
     }
 
@@ -124,17 +113,9 @@ public class PiratePairs {
     }
 
     static void removePlayer(Player player) {
-        Player[] tempPlayers = new Player[players.length - 1];
-        int index = 0;
-        for (int i = 0; i < players.length; i++) {
-            if (players[i] != player) {
-                tempPlayers[index] = players[i];
-                index++;
-            }
-            
-        }
-        players = tempPlayers;
-        checkEndConditions();
+        losingPlayer = player;
+        playing = false;
+        
     }
 
     public static int getMaxScore() {
