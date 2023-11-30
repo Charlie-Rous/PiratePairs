@@ -24,18 +24,18 @@ public class Player {
 
     public void takeCard(int card) {
         boolean containedInHand = false;
+        String aOrAn = "a ";
+        if (card == 8) {
+            aOrAn = "an ";
+        } 
+        String message = name + " drew " + aOrAn + card;
         for (int i = 0; i < hand.length; i++) {
             if (card == hand[i]) {
                 containedInHand = true;
+                message += " Thats a match!";
             }
         }
-        if (card == 8) {
-            System.out.println(name + " drew an " + card);
-        } else {
-            System.out.println(name + " drew a " + card);
-        }
-
-       
+        System.out.println(message);
         if (containedInHand) {
             increaseScore(card);;
             discardHand();
