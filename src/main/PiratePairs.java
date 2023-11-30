@@ -6,6 +6,8 @@ public class PiratePairs {
     static int maxTurns = 0;
     static boolean playing = true;
     
+    static int minimum = 10;
+    
     public static void main(String[] args){
         players[0] = p1;
         players[1] = p2;
@@ -39,6 +41,8 @@ public class PiratePairs {
     public static void TakeTurn(Player player) {
         if (player.wantsCard(cardsOnTable()) || !player.hasCards()) {
             player.takeCard(deck.dealCard());
+        } else {
+            player.takeMininimum(cardsOnTable(), minimumPlayer());
         }
     }
 
@@ -65,6 +69,7 @@ public class PiratePairs {
 
     static int[] cardsOnTable() {
         int length = 0;
+        
         for (Player player : players) {
             length += player.getHand().length;
         }
@@ -74,10 +79,23 @@ public class PiratePairs {
             for (int i = 0; i < player.getHand().length; i++) {
                 cardsOnTable[index] = player.getHand()[i];
                 index++;
+                
             }
             
         }
         return cardsOnTable;
+    }
+
+    static Player minimumPlayer() {
+        Player minimumPlayer = players[0];
+        for (Player player : players) {
+            for (int i = 0; i < player.getHand().length; i++) {
+                if (player.getHand()[i] <= minimum) {
+                    minimumPlayer = player;
+                }
+            }
+        }
+        return minimumPlayer;
     }
 }
 

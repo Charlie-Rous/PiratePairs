@@ -122,6 +122,29 @@ public class Player {
         return minimum;
     }
 
+    public void takeMininimum(int[] cardsOnTable, Player player) {
+        score += minimumCard(cardsOnTable);
+        discardHand();
+        System.out.println(name + " took " + player.name + "'s " + minimumCard(cardsOnTable));
+        player.loseCard(minimumCard(cardsOnTable));
+    }
+ 
+    public void loseCard(int card) {
+        int[] newHand = new int[hand.length - 1];
+        int[] discard = new int[1];
+        int index = 0;
+        for (int i = 0; i < hand.length; i ++) {
+            if (hand[i] != card) {
+                newHand[index] = hand[i];
+                index++;
+            } else {
+                discard[0] = hand[i];
+            }
+        }
+        deck.discard(discard);
+        hand = newHand;
+    }
+
 }
 
 
