@@ -9,8 +9,6 @@ public class PiratePairs {
     static boolean playing = true;
     static int maxScore = 21;
     
-    
-    
     public static void main(String[] args){
         players[0] = p1;
         players[1] = p2;
@@ -35,7 +33,6 @@ public class PiratePairs {
     }
 
     public static void Start() {
-        deck.populateDeck();
         deck.shuffle();
         System.out.println("Welcome");
         printLine();

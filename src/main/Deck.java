@@ -5,8 +5,10 @@ public class Deck {
     private int[] discard = new int[0];
     private int[] numCards = {0 , 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
    
-
-   public void populateDeck() {
+    public Deck() {
+        populateDeck();
+    }
+   private void populateDeck() {
     for (int i = 1; i <= 10; i++) {
         for (int j = 0; j < i; j++ ) {
             cards[index] = i;
@@ -77,7 +79,7 @@ public class Deck {
         discard = tempDiscard;
    }
 
-   public void reShuffle() {s
+   public void reShuffle() {
         System.out.println("Deck Reset");
         cards = discard;
         for (int i = 0; i < cards.length; i++) {
