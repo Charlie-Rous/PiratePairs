@@ -5,8 +5,8 @@ public class PiratePairs {
     static Player p2 = new Player("Mark", deck, 30);
     static int maxTurns = 0;
     static boolean playing = true;
-    static Player minimumPlayer = p1;
-    static int minimum = 10;
+    
+    
     
     public static void main(String[] args){
         players[0] = p1;
@@ -18,7 +18,7 @@ public class PiratePairs {
                 TakeTurn(player);
             }
             printPlayerStatus();
-            System.out.println("minimumPlayer: " + minimumPlayer.getName());
+            
             printLine();
             checkEndConditions();
             
@@ -40,11 +40,18 @@ public class PiratePairs {
     }
 
     public static void TakeTurn(Player player) {
-        if (!player.hasCards() || player.wantsCard(cardsOnTable())) {
-            player.takeCard(deck.dealCard());
+        if (player.hasCards() ) {
+            
+            
+            if (player.wantsCard(cardsOnTable())) {
+                player.takeCard(deck.dealCard());
+            } else {
+                
+            player.takeMininimum(cardsOnTable(), minimumPlayer());
+            }
+            
         } else {
-            System.out.println("minimumP: " + minimumPlayer.getName());
-            player.takeMininimum(cardsOnTable(), minimumPlayer);
+            player.takeCard(deck.dealCard());
         }
     }
 
@@ -88,17 +95,26 @@ public class PiratePairs {
         return cardsOnTable;
     }
 
-    static void minimumPlayer() {
+    static Player minimumPlayer() {
         
         for (Player player : players) {
             for (int i = 0; i < player.getHand().length; i++) {
-                if (player.getHand()[i] < minimum) {
-                    minimumPlayer = player;
-                    minimum = player.getHand()[i];
+                if (player.getHand()[i] == minimumCard(cardsOnTable())) {
+                    return player;
                 }
             }
         }
         
+        return null;
+    }
+    static int minimumCard(int[] cards) {
+        int minimum = cards[0];
+        for (int i = 0; i < cards.length; i++) {
+            if (cards[i] < minimum) {
+                minimum = cards[i];
+            }
+        }
+        return minimum;
     }
 }
 

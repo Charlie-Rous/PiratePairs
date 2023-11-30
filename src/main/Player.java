@@ -75,7 +75,7 @@ public class Player {
         }
         expectedValue = sum * matchChance;
         // System.out.println(name + " expextedVal: " + expectedValue);
-        System.out.println("minimum card: " + minimumCard);
+        
         if (expectedValue < minimumCard) {
             return true;
         } else {
@@ -114,6 +114,7 @@ public class Player {
     }
 
     private int minimumCard(int[] cards) {
+        
         int minimum = cards[0];
         for (int i = 0; i < cards.length; i++) {
             if (cards[i] < minimum) {
@@ -124,10 +125,14 @@ public class Player {
     }
 
     public void takeMininimum(int[] cardsOnTable, Player player) {
-        score += minimumCard(cardsOnTable);
+        int minimumCard = minimumCard(cardsOnTable);
+        score += minimumCard;
+        if (player != this) {
+            player.loseCard(minimumCard);
+        }
         discardHand();
         System.out.println(name + " took " + player.name + "'s " + minimumCard(cardsOnTable));
-        player.loseCard(minimumCard(cardsOnTable));
+        
     }
  
     public void loseCard(int card) {
@@ -144,6 +149,9 @@ public class Player {
         }
         deck.discard(discard);
         hand = newHand;
+        if (hand.length == 0) {
+            hasCards = false;
+        }
     }
 
 }
