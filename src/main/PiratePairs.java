@@ -5,6 +5,7 @@ public class PiratePairs {
     static Player p2 = new Player("Mark", deck, 30);
     static int maxTurns = 0;
     static boolean playing = true;
+    static int maxScore = 21;
     
     
     
@@ -23,6 +24,7 @@ public class PiratePairs {
             checkEndConditions();
             
         }
+        System.out.println("Game Over! " + players[0].getName() + " Wins!");
         
     }
 
@@ -69,7 +71,7 @@ public class PiratePairs {
         if (players.length == 1) {
             playing = false;
         }
-        if (maxTurns >= 20) {
+        if (maxTurns >= 50) {
             playing = false;
         } else {
             maxTurns++;
@@ -115,6 +117,24 @@ public class PiratePairs {
             }
         }
         return minimum;
+    }
+
+    static void removePlayer(Player player) {
+        Player[] tempPlayers = new Player[players.length - 1];
+        int index = 0;
+        for (int i = 0; i < players.length; i++) {
+            if (players[i] != player) {
+                tempPlayers[index] = players[i];
+                index++;
+            }
+            
+        }
+        players = tempPlayers;
+        checkEndConditions();
+    }
+
+    public static int getMaxScore() {
+        return maxScore;
     }
 }
 

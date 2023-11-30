@@ -13,8 +13,12 @@ public class Player {
         maxMatchChance = _maxMatchChance;
     }
 
-    public void increaseScore(int num) {
+    private void increaseScore(int num) {
         score += num;
+        if (score >= PiratePairs.getMaxScore()) {
+            System.out.println(name + "'s score is " + score + " " + name + " is out");
+            PiratePairs.removePlayer(this);
+        }
     }
 
 
@@ -27,7 +31,7 @@ public class Player {
         }
         System.out.println(name + " drew a " + card);
         if (containedInHand) {
-            score += card;
+            increaseScore(card);;
             discardHand();
         } else {
             addToHand(card);
@@ -126,7 +130,7 @@ public class Player {
 
     public void takeMininimum(int[] cardsOnTable, Player player) {
         int minimumCard = minimumCard(cardsOnTable);
-        score += minimumCard;
+        increaseScore(minimumCard);;
         if (player != this) {
             player.loseCard(minimumCard);
         }
