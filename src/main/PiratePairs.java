@@ -9,8 +9,8 @@ public class PiratePairs {
     static boolean playing = true;
     static int maxScore = 21;
     static Player losingPlayer;
-    
-    public static void main(String[] args){
+
+    public static void main(String[] args) {
         players[0] = p1;
         players[1] = p2;
         players[2] = p3;
@@ -27,7 +27,7 @@ public class PiratePairs {
             }
             printPlayerStatus();
             printLine();
-            
+
         }
         System.out.println(losingPlayer.getName() + " loses");
     }
@@ -45,16 +45,15 @@ public class PiratePairs {
     }
 
     public static void TakeTurn(Player player) {
-        if (player.hasCards() ) {
-            
-            
+        if (player.hasCards()) {
+
             if (player.wantsCard(cardsOnTable())) {
                 player.takeCard(deck.dealCard());
             } else {
-                
-            player.takeMininimum(cardsOnTable(), minimumPlayer());
+
+                player.takeMininimum(cardsOnTable(), minimumPlayer());
             }
-            
+
         } else {
             player.takeCard(deck.dealCard());
         }
@@ -66,13 +65,14 @@ public class PiratePairs {
 
     public static void printPlayerStatus() {
         for (int i = 0; i < players.length; i++) {
-            System.out.println(players[i].getName() + " Hand: " + players[i].handToString() + " Score: " + players[i].getScore());
+            System.out.println(
+                    players[i].getName() + " Hand: " + players[i].handToString() + " Score: " + players[i].getScore());
         }
     }
 
     static int[] cardsOnTable() {
         int length = 0;
-        
+
         for (Player player : players) {
             length += player.getHand().length;
         }
@@ -82,15 +82,15 @@ public class PiratePairs {
             for (int i = 0; i < player.getHand().length; i++) {
                 cardsOnTable[index] = player.getHand()[i];
                 index++;
-                
+
             }
-            
+
         }
         return cardsOnTable;
     }
 
     static Player minimumPlayer() {
-        
+
         for (Player player : players) {
             for (int i = 0; i < player.getHand().length; i++) {
                 if (player.getHand()[i] == minimumCard(cardsOnTable())) {
@@ -98,10 +98,10 @@ public class PiratePairs {
                 }
             }
         }
-        
+
         return null;
     }
-    
+
     static int minimumCard(int[] cards) {
         int minimum = cards[0];
         for (int i = 0; i < cards.length; i++) {
@@ -115,11 +115,10 @@ public class PiratePairs {
     static void removePlayer(Player player) {
         losingPlayer = player;
         playing = false;
-        
+
     }
 
     public static int getMaxScore() {
         return maxScore;
     }
 }
-

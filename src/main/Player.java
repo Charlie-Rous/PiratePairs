@@ -4,12 +4,11 @@ public class Player {
     private int score = 0;
     private Deck deck;
     private boolean hasCards = false;
-    
 
     public Player(String _name, Deck _deck) {
         name = _name;
         deck = _deck;
-        
+
     }
 
     private void increaseScore(int num) {
@@ -25,7 +24,7 @@ public class Player {
         String aOrAn = "a ";
         if (card == 8) {
             aOrAn = "an ";
-        } 
+        }
         String message = name + " drew " + aOrAn + card;
         for (int i = 0; i < hand.length; i++) {
             if (card == hand[i]) {
@@ -35,14 +34,14 @@ public class Player {
         }
         System.out.println(message);
         if (containedInHand) {
-            increaseScore(card);;
+            increaseScore(card);
             discardHand();
         } else {
             addToHand(card);
         }
-        
+
     }
-    
+
     private void addToHand(int card) {
         int[] tempHand = new int[hand.length + 1];
 
@@ -57,18 +56,17 @@ public class Player {
 
     public String handToString() {
         String handToString = "[";
-        
-        if (hand.length > 0){
+
+        if (hand.length > 0) {
             handToString += hand[0];
-            for (int i = 1; i < hand.length; i ++) {
+            for (int i = 1; i < hand.length; i++) {
                 handToString += "," + hand[i];
             }
         }
- 
-        
+
         handToString += "]";
         return handToString;
-        
+
     }
 
     public boolean wantsCard(int[] cardOnTable) {
@@ -86,13 +84,13 @@ public class Player {
         }
         expectedValue = sum * matchChance;
         // System.out.println(name + " expextedVal: " + expectedValue);
-        
+
         if (expectedValue < minimumCard) {
             return true;
         } else {
             return false;
         }
-        
+
     }
 
     private float CalcMatchChance(int card) {
@@ -125,7 +123,7 @@ public class Player {
     }
 
     private int minimumCard(int[] cards) {
-        
+
         int minimum = cards[0];
         for (int i = 0; i < cards.length; i++) {
             if (cards[i] < minimum) {
@@ -137,20 +135,21 @@ public class Player {
 
     public void takeMininimum(int[] cardsOnTable, Player player) {
         int minimumCard = minimumCard(cardsOnTable);
-        increaseScore(minimumCard);;
+        increaseScore(minimumCard);
+        ;
         if (player != this) {
             player.loseCard(minimumCard);
         }
         discardHand();
         System.out.println(name + " took " + player.name + "'s " + minimumCard(cardsOnTable));
-        
+
     }
- 
+
     public void loseCard(int card) {
         int[] newHand = new int[hand.length - 1];
         int[] discard = new int[1];
         int index = 0;
-        for (int i = 0; i < hand.length; i ++) {
+        for (int i = 0; i < hand.length; i++) {
             if (hand[i] != card) {
                 newHand[index] = hand[i];
                 index++;
@@ -166,5 +165,3 @@ public class Player {
     }
 
 }
-
-
