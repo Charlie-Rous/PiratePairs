@@ -77,7 +77,7 @@ public class Deck {
         discard = tempDiscard;
    }
 
-   public void reShuffle() {
+   public void reShuffle() {s
         System.out.println("Deck Reset");
         cards = discard;
         for (int i = 0; i < cards.length; i++) {
