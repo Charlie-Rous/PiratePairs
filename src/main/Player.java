@@ -25,9 +25,9 @@ public class Player {
                 containedInHand = true;
             }
         }
+        System.out.println(name + " drew a " + card);
         if (containedInHand) {
             score += card;
-            System.out.println(name + " drew a " + card);
             discardHand();
         } else {
             addToHand(card);
@@ -66,6 +66,7 @@ public class Player {
     public boolean wantsCard(int[] cardOnTable) {
         float matchChance = 0;
         int sum = 0;
+        
         int minimumCard = minimumCard(cardOnTable);
         float expectedValue = 0;
         for (int card : hand) {
@@ -73,7 +74,7 @@ public class Player {
             sum += card;
         }
         expectedValue = sum * matchChance;
-        System.out.println(name + " expextedVal: " + expectedValue);
+        // System.out.println(name + " expextedVal: " + expectedValue);
         System.out.println("minimum card: " + minimumCard);
         if (expectedValue < minimumCard) {
             return true;
@@ -114,7 +115,7 @@ public class Player {
 
     private int minimumCard(int[] cards) {
         int minimum = cards[0];
-        for (int i = 1; i < cards.length; i++) {
+        for (int i = 0; i < cards.length; i++) {
             if (cards[i] < minimum) {
                 minimum = cards[i];
             }
