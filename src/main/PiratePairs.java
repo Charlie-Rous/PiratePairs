@@ -112,6 +112,7 @@ public class PiratePairs {
         
         return null;
     }
+    
     static int minimumCard(int[] cards) {
         int minimum = cards[0];
         for (int i = 0; i < cards.length; i++) {

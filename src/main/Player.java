@@ -20,7 +20,6 @@ public class Player {
         }
     }
 
-
     public void takeCard(int card) {
         boolean containedInHand = false;
         String aOrAn = "a ";
