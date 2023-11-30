@@ -32,7 +32,7 @@ public class Player {
         if (card == 8) {
             System.out.println(name + " drew an " + card);
         } else {
-            System.out.println(name + " drew an " + card);
+            System.out.println(name + " drew a " + card);
         }
 
        
