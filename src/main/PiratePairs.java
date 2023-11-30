@@ -2,7 +2,7 @@ public class PiratePairs {
     static Player[] players = new Player[2];
     static Deck deck = new Deck();
     static Player p1 = new Player("Dave", deck, 50);
-    static Player p2 = new Player("Mark", deck, 60);
+    static Player p2 = new Player("Mark", deck, 30);
     static int maxTurns = 0;
     static boolean playing = true;
     
@@ -18,8 +18,7 @@ public class PiratePairs {
             printPlayerStatus();
             printLine();
             checkEndConditions();
-            
-            
+                
         }
         
     }
@@ -38,7 +37,7 @@ public class PiratePairs {
     }
 
     public static void TakeTurn(Player player) {
-        if (player.wantsCard() || !player.hasCards()) {
+        if (player.wantsCard(cardsOnTable()) || !player.hasCards()) {
             player.takeCard(deck.dealCard());
         }
     }
@@ -46,7 +45,6 @@ public class PiratePairs {
     public static void printLine() {
         System.out.println("-----------------------");
     }
-
 
     public static void printPlayerStatus() {
         for (int i = 0; i < players.length; i++) {
@@ -63,6 +61,23 @@ public class PiratePairs {
         } else {
             maxTurns++;
         }
+    }
+
+    static int[] cardsOnTable() {
+        int length = 0;
+        for (Player player : players) {
+            length += player.getHand().length;
+        }
+        int[] cardsOnTable = new int[length];
+        int index = 0;
+        for (Player player : players) {
+            for (int i = 0; i < player.getHand().length; i++) {
+                cardsOnTable[index] = player.getHand()[i];
+                index++;
+            }
+            
+        }
+        return cardsOnTable;
     }
 }
 

@@ -48,36 +48,46 @@ public class Player {
     }
 
     public String handToString() {
-        String handToString = "[" + hand[0];
-        for (int i = 1; i < hand.length; i ++) {
-            handToString += "," + hand[i];
+        String handToString = "[";
+        
+        if (hand.length > 0){
+            handToString += hand[0];
+            for (int i = 1; i < hand.length; i ++) {
+                handToString += "," + hand[i];
+            }
         }
+ 
+        
         handToString += "]";
         return handToString;
         
     }
 
-    public boolean wantsCard() {
-        float matchChance = 0;
+    public boolean wantsCard(int[] cardOnTable) {
+        float expectedValue = 0;
+        int minimumCard = minimumCard(cardOnTable);
         for (int card : hand) {
-            matchChance += CalcMatchChance(card);
+            expectedValue += card * CalcMatchChance(card);
         }
-        if (matchChance <= maxMatchChance) {
+        System.out.println(name + " expextedVal: " + expectedValue);
+        System.out.println("minimum card: " + minimumCard);
+        if (expectedValue < minimumCard) {
             return true;
         } else {
             return false;
         }
+        
     }
 
     private float CalcMatchChance(int card) {
         int[] numCards = deck.getNumCards();
-        float matchChance = (float) numCards[card] / deck.getDeckLength() * 100;
+        float matchChance = (float) numCards[card] / deck.getDeckLength();
         return matchChance;
     }
 
     private void discardHand() {
         deck.discard(hand);
-        hand = new int[1];
+        hand = new int[0];
         hasCards = false;
 
     }
@@ -93,6 +103,21 @@ public class Player {
     public int getScore() {
         return score;
     }
+
+    public int[] getHand() {
+        return hand;
+    }
+
+    private int minimumCard(int[] cards) {
+        int minimum = cards[0];
+        for (int i = 1; i < cards.length; i++) {
+            if (cards[i] < minimum) {
+                minimum = cards[i];
+            }
+        }
+        return minimum;
+    }
+
 }
 
 
