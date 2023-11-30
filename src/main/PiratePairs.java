@@ -1,8 +1,10 @@
 public class PiratePairs {
-    static Player[] players = new Player[2];
+    static Player[] players = new Player[4];
     static Deck deck = new Deck();
     static Player p1 = new Player("Dave", deck, 50);
     static Player p2 = new Player("Mark", deck, 30);
+    static Player p3 = new Player("Henrey", deck, 30);
+    static Player p4 = new Player("Chris", deck, 30);
     static int maxTurns = 0;
     static boolean playing = true;
     static int maxScore = 21;
@@ -12,6 +14,8 @@ public class PiratePairs {
     public static void main(String[] args){
         players[0] = p1;
         players[1] = p2;
+        players[2] = p3;
+        players[3] = p4;
         Start();
 
         while (playing) {

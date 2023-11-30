@@ -38,13 +38,20 @@ public class Deck {
    public int dealCard() {
     int card = cards[0];
     deckLength -= 1;
+    
     int[] newCards = new int[deckLength]; 
     for (int i = 0; i < deckLength; i++) {
         newCards[i] = cards[i + 1];
     }
-    cards = newCards;
 
+    cards = newCards;
     numCards[card] -= 1;
+
+    if (cards.length == 0) {
+        reShuffle();
+    }
+
+    
     return card;
    }
     
@@ -69,6 +76,15 @@ public class Deck {
         }
         discard = tempDiscard;
    }
-   
+
+   public void reShuffle() {
+        System.out.println("Deck Reset");
+        cards = discard;
+        for (int i = 0; i < cards.length; i++) {
+            numCards[cards[i]] += 1;
+        }
+        deckLength = cards.length;
+        shuffle();
+   }
 }
 
