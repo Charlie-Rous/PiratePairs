@@ -9,7 +9,7 @@ public class PiratePairs {
     static Dealer dealer = new Dealer(deck);
 
     public static void main(String[] args) {
-       dealer.players[0] = p1;
+        dealer.players[0] = p1;
         dealer.players[1] = p2;
         dealer.players[2] = p3;
         dealer.players[3] = p4;
@@ -18,13 +18,15 @@ public class PiratePairs {
         while (playing) {
             dealer.playOneRound();
         }
-        
+
     }
+
     public static void setPlaying(boolean tf) {
         playing = tf;
     }
+
     public static boolean getPlaying() {
         return playing;
     }
-    
+
 }
