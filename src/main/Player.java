@@ -13,10 +13,6 @@ public class Player {
 
     private void increaseScore(int num) {
         score += num;
-        if (score >= PiratePairs.getMaxScore()) {
-            System.out.println(name + "'s score is " + score + " " + name + " is out");
-            PiratePairs.removePlayer(this);
-        }
     }
 
     public void takeCard(int card) {
@@ -74,7 +70,7 @@ public class Player {
         int sum = 0;
         int minimumCard = minimumCard(cardOnTable);
         float expectedValue = 0;
-        if (score + minimumCard >= PiratePairs.maxScore) {
+        if (score + minimumCard >= Dealer.maxScore) {
             return true;
         }
 
