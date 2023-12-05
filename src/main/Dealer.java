@@ -1,9 +1,7 @@
 public class Dealer {
     private Deck deck;
-    public Player[] players = new Player[4];
+    public Player[] players = new Player[0];
     static public int maxScore = 21;
-    
-
 
     public Dealer(Deck deck) {
         this.deck = deck;
@@ -34,9 +32,8 @@ public class Dealer {
         if (PiratePairs.playing) {
             printPlayerStatus();
         }
-        
+
         printLine();
-        
 
     }
 
@@ -85,7 +82,7 @@ public class Dealer {
 
         return null;
     }
-    
+
     private int getMinimumCard(int[] cards) {
         int minimum = cards[0];
         for (int i = 0; i < cards.length; i++) {
@@ -103,7 +100,7 @@ public class Dealer {
     private void printPlayerStatus() {
         for (int i = 0; i < players.length; i++) {
             System.out.println(
-                    players[i].getName() + " Hand: " + players[i].handToString() + " Score: " + players[i].getScore());
+                    players[i].getName() + "'s Hand: " + players[i].handToString() + " Score: " + players[i].getScore());
         }
     }
 
@@ -112,13 +109,22 @@ public class Dealer {
             playerLoses(player);
         }
     }
-    
+
     private void playerLoses(Player player) {
         PiratePairs.setPlaying(false);
         System.out.println(player.getName() + " Loses!");
-        
 
     }
 
-   
+    public void addPlayer(Player player) {
+        Player[] tempPlayers = new Player[players.length + 1];
+
+        for (int i = 0; i < players.length; i++) {
+            tempPlayers[i] = players[i];
+        }
+        tempPlayers[players.length] = player;
+        
+        players = tempPlayers;
+        
+    }
 }
