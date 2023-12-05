@@ -21,7 +21,7 @@ public class Player {
         if (card == 8) {
             aOrAn = "an ";
         }
-       
+
         for (int i = 0; i < hand.length; i++) {
             if (card == hand[i]) {
                 containedInHand = true;

@@ -1,7 +1,7 @@
 public class Dealer {
     private Deck deck;
     public Player[] players = new Player[0];
-    static public int maxScore = 21;
+    public static int maxScore = 21;
 
     public Dealer(Deck deck) {
         this.deck = deck;
@@ -37,7 +37,7 @@ public class Dealer {
 
     }
 
-    public void TakeTurn(Player player) {
+    private void TakeTurn(Player player) {
         if (player.hasCards()) {
             if (player.wantsCard(cardsOnTable())) {
                 player.takeCard(deck.dealCard());
