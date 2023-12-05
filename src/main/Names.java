@@ -5,10 +5,10 @@ public class Names {
             "Kendal",
             "Faith",
             "Corrina",
-            " Ervin",
+            "Ervin",
             "Meadow",
             "Caleb",
-            " Jordyn",
+            "Jordyn",
             "Kenia",
             "Leslie",
             "Akira",
@@ -103,10 +103,20 @@ public class Names {
             "Jaidyn",
             "Hayley",
             "Keagan",
-            "Ramon" };
+            "Ramon"};
 
     public static String randomName() {
-        int index = (int) Math.random() * names.length;
-        return names[index];
+        int randomIndex = (int) (Math.random() * names.length);
+        String name = names[randomIndex];
+        String[] tempNames = new String[names.length - 1];
+        int index = 0;
+        for (int i = 0; i < names.length; i++) {
+            if (names[i] != name) {
+                tempNames[index] = names[i];
+                index++;
+            }
+        }
+        names = tempNames;
+        return name;
     }
 }

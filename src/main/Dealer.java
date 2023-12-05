@@ -1,6 +1,6 @@
 public class Dealer {
     private Deck deck;
-    public Player[] players = new Player[4];
+    public Player[] players = new Player[0];
     static public int maxScore = 21;
 
     public Dealer(Deck deck) {
@@ -116,4 +116,15 @@ public class Dealer {
 
     }
 
+    public void addPlayer(Player player) {
+        Player[] tempPlayers = new Player[players.length + 1];
+
+        for (int i = 0; i < players.length; i++) {
+            tempPlayers[i] = players[i];
+        }
+        tempPlayers[players.length] = player;
+        
+        players = tempPlayers;
+        
+    }
 }
