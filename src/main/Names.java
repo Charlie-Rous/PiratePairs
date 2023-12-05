@@ -103,7 +103,7 @@ public class Names {
             "Jaidyn",
             "Hayley",
             "Keagan",
-            "Ramon"};
+            "Ramon" };
 
     public static String randomName() {
         int randomIndex = (int) (Math.random() * names.length);

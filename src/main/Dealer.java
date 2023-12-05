@@ -100,7 +100,8 @@ public class Dealer {
     private void printPlayerStatus() {
         for (int i = 0; i < players.length; i++) {
             System.out.println(
-                    players[i].getName() + "'s Hand: " + players[i].handToString() + " Score: " + players[i].getScore());
+                    players[i].getName() + "'s Hand: " + players[i].handToString() + " Score: "
+                            + players[i].getScore());
         }
     }
 
@@ -123,8 +124,8 @@ public class Dealer {
             tempPlayers[i] = players[i];
         }
         tempPlayers[players.length] = player;
-        
+
         players = tempPlayers;
-        
+
     }
 }

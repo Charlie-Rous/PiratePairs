@@ -19,15 +19,15 @@ public class Deck {
     }
 
     public void printDeck() {
-        for (int i = 0; i < deckLength; i++) {
+        for (int i = 0; i < cards.length; i++) {
             System.out.println(cards[i]);
         }
     }
 
     public void shuffle() {
-        int[] shuffledCards = new int[deckLength];
+        int[] shuffledCards = new int[cards.length];
         int index = 0;
-        for (int i = deckLength - 1; i >= 0; i--) {
+        for (int i = cards.length - 1; i >= 0; i--) {
             int randomCardIndex = (int) (Math.random() * i);
             shuffledCards[index] = cards[randomCardIndex];
 
@@ -40,10 +40,9 @@ public class Deck {
 
     public int dealCard() {
         int card = cards[0];
-        deckLength -= 1;
 
-        int[] newCards = new int[deckLength];
-        for (int i = 0; i < deckLength; i++) {
+        int[] newCards = new int[cards.length - 1];
+        for (int i = 0; i < cards.length - 1; i++) {
             newCards[i] = cards[i + 1];
         }
 
@@ -62,7 +61,7 @@ public class Deck {
     }
 
     public int getDeckLength() {
-        return deckLength;
+        return cards.length;
     }
 
     public void discard(int[] hand) {
@@ -85,7 +84,6 @@ public class Deck {
         for (int i = 0; i < cards.length; i++) {
             numCards[cards[i]] += 1;
         }
-        deckLength = cards.length;
         shuffle();
     }
 }

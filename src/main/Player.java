@@ -21,14 +21,15 @@ public class Player {
         if (card == 8) {
             aOrAn = "an ";
         }
-        String message = name + " drew " + aOrAn + card;
+       
         for (int i = 0; i < hand.length; i++) {
             if (card == hand[i]) {
                 containedInHand = true;
-                message += " Thats a match!";
+                System.out.println(name + " drew " + aOrAn + " " + card + ". Thats a match!");
+                break;
             }
         }
-        System.out.println(message);
+
         if (containedInHand) {
             increaseScore(card);
             discardHand();
@@ -75,7 +76,7 @@ public class Player {
         }
 
         for (int card : hand) {
-            matchChance += CalcMatchChance(card);
+            matchChance += calcMatchChance(card);
             sum += card;
         }
         expectedValue = sum * matchChance;
@@ -89,7 +90,7 @@ public class Player {
 
     }
 
-    private float CalcMatchChance(int card) {
+    private float calcMatchChance(int card) {
         int[] numCards = deck.getNumCards();
         float matchChance = (float) numCards[card] / deck.getDeckLength();
         return matchChance;

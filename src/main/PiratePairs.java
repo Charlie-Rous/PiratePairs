@@ -4,9 +4,8 @@ public class PiratePairs {
     static Dealer dealer = new Dealer(deck);
 
     public static void main(String[] args) {
-        populateGame(30);
+        populateGame(5);
         dealer.StartGame();
-
         while (playing) {
             dealer.playOneRound();
         }
@@ -25,6 +24,6 @@ public class PiratePairs {
         for (int i = 0; i < numPlayers; i++) {
             dealer.addPlayer(new Player(Names.randomName(), deck));
         }
-    } 
-    
+    }
+
 }
