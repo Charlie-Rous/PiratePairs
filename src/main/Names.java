@@ -20,8 +20,8 @@ public class Names {
             "Dylan ",
             "Rosa",
             "Mason",
-            "Ricky ",
-            "Ashly ",
+            "Ricky",
+            "Ashly",
             "Joslyn",
             "Tiana",
             "Caleigh",
@@ -103,7 +103,7 @@ public class Names {
             "Jaidyn",
             "Hayley",
             "Keagan",
-            "Ramon"};
+            "Ramon" };
 
     public static String randomName() {
         int randomIndex = (int) (Math.random() * names.length);

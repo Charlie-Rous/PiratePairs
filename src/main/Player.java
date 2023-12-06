@@ -1,14 +1,19 @@
 public class Player {
+    public static final int NUM_STRATEGIES = 5;
     private String name;
     private int[] hand = {};
     private int score = 0;
     private Deck deck;
     private boolean hasCards = false;
+    private int strategy;
+    private Dealer dealer;
+    private boolean[] strategys = { strategyZero(), strategyOne(), strategyTwo(), strategyThree() };
 
-    public Player(String _name, Deck _deck) {
-        name = _name;
-        deck = _deck;
-
+    public Player(String name, Deck deck, int strategy, Dealer dealer) {
+        this.name = name;
+        this.deck = deck;
+        this.strategy = strategy;
+        this.dealer = dealer;
     }
 
     private void increaseScore(int num) {
@@ -21,14 +26,15 @@ public class Player {
         if (card == 8) {
             aOrAn = "an ";
         }
-        String message = name + " drew " + aOrAn + card;
+
         for (int i = 0; i < hand.length; i++) {
             if (card == hand[i]) {
                 containedInHand = true;
-                message += " Thats a match!";
+                System.out.println(name + " drew " + aOrAn + " " + card + ". Thats a match!");
+                break;
             }
         }
-        System.out.println(message);
+
         if (containedInHand) {
             increaseScore(card);
             discardHand();
@@ -66,30 +72,14 @@ public class Player {
     }
 
     public boolean wantsCard(int[] cardOnTable) {
-        float matchChance = 0;
-        int sum = 0;
-        int minimumCard = minimumCard(cardOnTable);
-        float expectedValue = 0;
-        if (score + minimumCard >= Dealer.maxScore) {
-            return true;
+        if (strategy != strategys.length) {
+            return strategys[strategy];
         }
-
-        for (int card : hand) {
-            matchChance += CalcMatchChance(card);
-            sum += card;
-        }
-        expectedValue = sum * matchChance;
-        // System.out.println(name + " expextedVal: " + expectedValue);
-
-        if (expectedValue < minimumCard) {
-            return true;
-        } else {
-            return false;
-        }
+        return defaultStrategy(cardOnTable);
 
     }
 
-    private float CalcMatchChance(int card) {
+    private float calcMatchChance(int card) {
         int[] numCards = deck.getNumCards();
         float matchChance = (float) numCards[card] / deck.getDeckLength();
         return matchChance;
@@ -160,4 +150,69 @@ public class Player {
         }
     }
 
+    private boolean defaultStrategy(int[] cardOnTable) {
+        float matchChance = 0;
+        int sum = 0;
+        int minimumCard = minimumCard(cardOnTable);
+        float expectedValue = 0;
+        if (score + minimumCard >= Dealer.maxScore) {
+            return true;
+        }
+        for (int card : hand) {
+            matchChance += calcMatchChance(card);
+            sum += card;
+        }
+        expectedValue = sum * matchChance;
+
+        if (expectedValue < minimumCard) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private boolean strategyZero() {
+        if (Math.random() < .5) {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean strategyOne() {
+        float matchChance = 0;
+        for (int card : hand) {
+            matchChance += calcMatchChance(card);
+        }
+        if (matchChance < .5) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private boolean strategyTwo() {
+        if (hand.length < 5) {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean strategyThree() {
+        for (int card : hand) {
+            if (card >= minimumCard(dealer.cardsOnTable())) {
+                if (calcMatchChance(card) > .5) {
+                    return true;
+                }
+            }
+        }
+        return false;
+
+    }
+
+    public int getStrategy() {
+        if (strategy == strategys.length) {
+            return -1;
+        }
+        return strategy;
+    }
 }

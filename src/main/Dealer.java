@@ -1,7 +1,7 @@
 public class Dealer {
     private Deck deck;
     public Player[] players = new Player[0];
-    static public int maxScore = 21;
+    public static int maxScore = 21;
 
     public Dealer(Deck deck) {
         this.deck = deck;
@@ -37,7 +37,7 @@ public class Dealer {
 
     }
 
-    public void TakeTurn(Player player) {
+    private void TakeTurn(Player player) {
         if (player.hasCards()) {
             if (player.wantsCard(cardsOnTable())) {
                 player.takeCard(deck.dealCard());
@@ -100,7 +100,8 @@ public class Dealer {
     private void printPlayerStatus() {
         for (int i = 0; i < players.length; i++) {
             System.out.println(
-                    players[i].getName() + "'s Hand: " + players[i].handToString() + " Score: " + players[i].getScore());
+                    players[i].getName() + "'s Hand: " + players[i].handToString() + " Score: "
+                            + players[i].getScore());
         }
     }
 
@@ -113,9 +114,13 @@ public class Dealer {
     private void playerLoses(Player player) {
         PiratePairs.setPlaying(false);
         System.out.println(player.getName() + " Loses!");
+        if (player.getStrategy() == -1) {
+            System.out.println("They used the default strategy");
+        } else {
+            System.out.println("They used strategy " + player.getStrategy());
+        }
 
     }
-
     public void addPlayer(Player player) {
         Player[] tempPlayers = new Player[players.length + 1];
 
@@ -123,8 +128,8 @@ public class Dealer {
             tempPlayers[i] = players[i];
         }
         tempPlayers[players.length] = player;
-        
+
         players = tempPlayers;
-        
+
     }
 }
