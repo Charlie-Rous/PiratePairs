@@ -1,13 +1,15 @@
 public class Dealer {
     private Deck deck;
     public Player[] players = new Player[0];
-    public static int maxScore = 21;
+    public static int maxScore = 60;
 
     public Dealer(Deck deck) {
         this.deck = deck;
     }
 
     public void StartGame() {
+        maxScore = (maxScore / players.length) + 1;
+        
         PiratePairs.setPlaying(true);
         deck.shuffle();
         System.out.println("Welcome");
@@ -121,9 +123,9 @@ public class Dealer {
         }
 
     }
+    
     public void addPlayer(Player player) {
         Player[] tempPlayers = new Player[players.length + 1];
-
         for (int i = 0; i < players.length; i++) {
             tempPlayers[i] = players[i];
         }
