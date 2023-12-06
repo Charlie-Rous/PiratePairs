@@ -120,7 +120,7 @@ public class Dealer {
             System.out.println("They used strategy " + player.getStrategy());
         }
 
-    
+    }
     public void addPlayer(Player player) {
         Player[] tempPlayers = new Player[players.length + 1];
 
