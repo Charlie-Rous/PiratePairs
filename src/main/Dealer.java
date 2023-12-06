@@ -2,6 +2,7 @@ public class Dealer {
     private Deck deck;
     public Player[] players = new Player[0];
     public static int maxScore = 60;
+    private int[] strategyLosses = new int[Player.NUM_STRATEGIES];
 
     public Dealer(Deck deck) {
         this.deck = deck;
@@ -122,8 +123,10 @@ public class Dealer {
         PiratePairs.setPlaying(false);
         System.out.println(player.getName() + " Loses!");
         if (player.getStrategy() == -1) {
+            strategyLosses[Player.NUM_STRATEGIES - 1] += 1;
             System.out.println("They used the default strategy");
         } else {
+            strategyLosses[player.getStrategy()] += 1;
             System.out.println("They used strategy " + player.getStrategy());
         }
 
@@ -138,5 +141,25 @@ public class Dealer {
 
         players = tempPlayers;
 
+    }
+
+    public void resetGame() {
+        Names.resetNames();
+        deck = new Deck();
+        players = new Player[0];
+        PiratePairs.populateGame(PiratePairs.numPlayers);
+        StartGame();
+    }
+
+    public void printStrategies() {
+        System.out.println("Strategy losses:");
+        for (int i = 0; i < Player.NUM_STRATEGIES; i++) {
+            if (i != strategyLosses.length - 1) {
+                System.out.println("Strategy " + i + ": " + strategyLosses[i]);
+            } else {
+                System.out.println("Default Strategy: " + strategyLosses[i]);
+            }
+            
+        }
     }
 }

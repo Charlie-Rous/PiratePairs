@@ -104,6 +104,7 @@ public class Names {
             "Hayley",
             "Keagan",
             "Ramon" };
+            static String[] resetNames = names;
 
     public static String randomName() {
         int randomIndex = (int) (Math.random() * names.length);
@@ -118,5 +119,8 @@ public class Names {
         }
         names = tempNames;
         return name;
+    }
+    public static void resetNames() {
+        names = resetNames;
     }
 }
