@@ -114,9 +114,13 @@ public class Dealer {
     private void playerLoses(Player player) {
         PiratePairs.setPlaying(false);
         System.out.println(player.getName() + " Loses!");
+        if (player.getStrategy() == -1) {
+            System.out.println("They used the default strategy");
+        } else {
+            System.out.println("They used strategy " + player.getStrategy());
+        }
 
-    }
-
+    
     public void addPlayer(Player player) {
         Player[] tempPlayers = new Player[players.length + 1];
 

@@ -3,7 +3,7 @@ public class Deck {
     private int[] cards = new int[deckLength];
     private int index = 0;
     private int[] discard = new int[0];
-    private int[] numCards = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    private int[] numCards = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 
     public Deck() {
         populateDeck();
