@@ -79,6 +79,7 @@ public class Deck {
     }
 
     public void reShuffle() {
+        // resets the deck when there are no cards left
         System.out.println("Deck Reset");
         cards = discard;
         for (int i = 0; i < cards.length; i++) {

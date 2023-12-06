@@ -22,6 +22,7 @@ public class PiratePairs {
 
     private static void populateGame(int numPlayers) {
         for (int i = 0; i < numPlayers; i++) {
+            // give player random name and strategy
             int strategy = (int) (Math.random() * Player.NUM_STRATEGIES);
             dealer.addPlayer(new Player(Names.randomName(), deck, strategy, dealer));
         }

@@ -8,8 +8,10 @@ public class Dealer {
     }
 
     public void StartGame() {
+        // set score player has to have to lose;
+
         maxScore = (maxScore / players.length) + 1;
-        
+
         PiratePairs.setPlaying(true);
         deck.shuffle();
         System.out.println("Welcome");
@@ -44,16 +46,18 @@ public class Dealer {
             if (player.wantsCard(cardsOnTable())) {
                 player.takeCard(deck.dealCard());
             } else {
-
+                // if player doest want card from deck they take lowest card on the table
                 player.takeMininimum(cardsOnTable(), minimumPlayer());
             }
 
         } else {
+            // player always takes a card when their hand is empty
             player.takeCard(deck.dealCard());
         }
     }
 
     public int[] cardsOnTable() {
+        // gets cards in all players hands
         int length = 0;
 
         for (Player player : players) {
@@ -73,7 +77,7 @@ public class Dealer {
     }
 
     public Player minimumPlayer() {
-
+        // finds player with lowest card in their hand
         for (Player player : players) {
             for (int i = 0; i < player.getHand().length; i++) {
                 if (player.getHand()[i] == getMinimumCard(cardsOnTable())) {
@@ -86,6 +90,7 @@ public class Dealer {
     }
 
     private int getMinimumCard(int[] cards) {
+        // returns minimum card from a set of
         int minimum = cards[0];
         for (int i = 0; i < cards.length; i++) {
             if (cards[i] < minimum) {
@@ -123,7 +128,7 @@ public class Dealer {
         }
 
     }
-    
+
     public void addPlayer(Player player) {
         Player[] tempPlayers = new Player[players.length + 1];
         for (int i = 0; i < players.length; i++) {

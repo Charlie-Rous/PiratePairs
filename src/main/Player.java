@@ -29,12 +29,12 @@ public class Player {
 
         for (int i = 0; i < hand.length; i++) {
             if (card == hand[i]) {
+                // check if card drawn is a match
                 containedInHand = true;
                 System.out.println(name + " drew " + aOrAn + " " + card + ". Thats a match!");
                 break;
             }
         }
-
         if (containedInHand) {
             increaseScore(card);
             discardHand();
@@ -76,7 +76,6 @@ public class Player {
             return strategys[strategy];
         }
         return defaultStrategy(cardOnTable);
-
     }
 
     private float calcMatchChance(int card) {
@@ -120,6 +119,7 @@ public class Player {
     }
 
     public void takeMininimum(int[] cardsOnTable, Player player) {
+        // takes the lowest card on the table
         int minimumCard = minimumCard(cardsOnTable);
         increaseScore(minimumCard);
         ;
@@ -156,14 +156,19 @@ public class Player {
         int minimumCard = minimumCard(cardOnTable);
         float expectedValue = 0;
         if (score + minimumCard >= Dealer.maxScore) {
+            // if you would lose taking the minimum card then draw a card
             return true;
         }
         for (int card : hand) {
+            // find the chance of drawig any card on this turn
             matchChance += calcMatchChance(card);
             sum += card;
         }
+        // multiply chance of drawing a card by value of hand to find a pseudo average
+        // value of your draw
         expectedValue = sum * matchChance;
 
+        // compare that value to the minimum card
         if (expectedValue < minimumCard) {
             return true;
         } else {
@@ -172,6 +177,7 @@ public class Player {
     }
 
     private boolean strategyZero() {
+        // 50 50 chance to draw a card
         if (Math.random() < .5) {
             return true;
         }
@@ -179,6 +185,7 @@ public class Player {
     }
 
     private boolean strategyOne() {
+        // if chance to draw a match is less than 50% draw a card
         float matchChance = 0;
         for (int card : hand) {
             matchChance += calcMatchChance(card);
@@ -191,6 +198,7 @@ public class Player {
     }
 
     private boolean strategyTwo() {
+        // draw a card when you have less than 5 cards in your hand
         if (hand.length < 5) {
             return true;
         }
@@ -198,14 +206,16 @@ public class Player {
     }
 
     private boolean strategyThree() {
+        // if there is a 50% chance or higher to draw a card greater than the minimum
+        // card take the minimum card
         for (int card : hand) {
             if (card >= minimumCard(dealer.cardsOnTable())) {
-                if (calcMatchChance(card) > .5) {
-                    return true;
+                if (calcMatchChance(card) >= .5) {
+                    return false;
                 }
             }
         }
-        return false;
+        return true;
 
     }
 
